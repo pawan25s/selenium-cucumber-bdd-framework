@@ -1,5 +1,6 @@
 BaseClass/baseClass.class
+StepDefinition/LoginStep.class
+PageObject/HomePage.class
 Hooks/hooks.class
-StepDefination/LoginStep.class
 PageObject/LoginPage.class
 Runners/runnerTest.class
