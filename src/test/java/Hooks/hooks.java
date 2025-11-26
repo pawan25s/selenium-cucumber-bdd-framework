@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 
 import BaseClass.baseClass;
 import io.cucumber.java.Before;
+import io.cucumber.java.After;
 
 public class hooks extends baseClass {
 
@@ -19,7 +20,7 @@ public class hooks extends baseClass {
 
     }
 
-    // @After
+     @After
      public void tearDown(){
          logger.info("Tearing down test environment - quitting browser");
          baseClass.quitBrowser();
