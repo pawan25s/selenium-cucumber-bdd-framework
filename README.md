@@ -23,24 +23,46 @@ It automates the Login functionality of SauceDemo — a sample e-commerce websit
 
 Automation-BDD-Project
 │
+├── .gitignore
 ├── pom.xml
-├── config.properties
+├── README.md
+├── testng.xml
+├── .vscode/
+├── Configuration/
+│   └── config.properties
 │
-└── src/test/java
-    ├── BaseClass/
-    │   └── baseClass.java
-    │
-    ├── StepDefinition/
-    │   └── LoginStep.java
-    │
-    ├── PageObject/
-    │   └── LoginPage.java
-    │
-    ├── Runners/
-    │   └── runnerTest.java
-    │
-    └── resources/
-        └── login.feature
+└── src/
+    └── test/
+        ├── java/
+        │   ├── BaseClass/
+        │   │   └── baseClass.java
+        │   │
+        │   ├── Hooks/
+        │   │   └── hooks.java
+        │   │
+        │   ├── PageObject/
+        │   │   ├── HomePage.java
+        │   │   └── LoginPage.java
+        │   │
+        │   ├── resources/
+        │   │   └── login.feature
+        │   │
+        │   ├── Runners/
+        │   │   └── runnerTest.java
+        │   │
+        │   ├── StepDefinition/
+        │   │   └── LoginStep.java
+        │   │
+        │   └── utilities/
+        │       ├── AnnotationTransformer.java
+        │       ├── configReader.java
+        │       ├── ExtentManager.java
+        │       ├── RetryAnalyzer.java
+        │       ├── TestContext.java
+        │       └── TestNGListener.java
+        │
+        └── resources/
+            └── log4j2.xml
 
 ⚙️ Technologies Used
 

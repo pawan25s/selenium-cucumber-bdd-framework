@@ -7,6 +7,9 @@ import BaseClass.baseClass;
 import io.cucumber.java.en.*;
 import PageObject.HomePage;
 import PageObject.LoginPage;
+import utilities.ExtentManager;
+import utilities.TestContext;
+import com.aventstack.extentreports.Status;
 import org.testng.Assert;
 
 public class LoginStep {
@@ -16,27 +19,37 @@ public class LoginStep {
     LoginPage login;
     HomePage homePage;
 
-    @Given("user is on login page")
-    public void user_is_on_login_page() {
+    @Given("user is on the SauceDemo login page")
+    public void user_is_on_the_sauce_demo_login_page() {
         logger.info("Navigating to login page: {}", baseClass.getProperty("url"));
         baseClass.getDriver().get(baseClass.getProperty("url"));
         login = new LoginPage(baseClass.getDriver());
         homePage = new HomePage(baseClass.getDriver());
         logger.info("Login page loaded successfully");
+        // ExtentTest will be created in password step
     }
 
     @When("user enters username {string}")
     public void user_enters_username(String username) {
+        TestContext.setTestData("username", username);
         logger.info("Entering username: {}", username);
         login.setUsername(username);
         logger.info("Username entered successfully");
+        // ExtentTest will be created in password step
     }
 
     @When("user enters password {string}")
     public void user_enters_password(String password) {
-        logger.info("Entering password");
+        TestContext.setTestData("password", password);
+        logger.info("Entering password: {}", password);
         login.enterPassword(password);
         logger.info("Password entered successfully");
+
+        // Create ExtentTest now that we have both username and password
+        String testName = TestContext.getDescriptiveTestName();
+        ExtentManager.createTest(testName, testName);
+        ExtentManager.getTest().info("Starting test: " + testName);
+        ExtentManager.getTest().log(Status.INFO, "Entered password");
     }
 
     @When("user clicks login button")
@@ -44,25 +57,28 @@ public class LoginStep {
         logger.info("Clicking login button");
         login.clickLogin();
         logger.info("Login button clicked");
+        if (ExtentManager.getTest() != null) {
+            ExtentManager.getTest().log(Status.INFO, "Clicked login button");
+        }
     }
 
-      @Then("user should navigate to {string}")
-    public void user_should_navigate_to(String expectedResult) {
+      @Then("login result should be {string}")
+    public void login_result_should_be(String expectedResult) {
 
         switch (expectedResult) {
 
-            case "home page":
-                logger.info("Verifying navigation to home page");
+            case "success":
+                logger.info("Verifying login success");
                 Assert.assertTrue(homePage.isProductsDisplayed());
-                logger.info("Successfully navigated to home page - products displayed");
+                logger.info("Login successful - products displayed");
                 break;
 
-            case "error message":
+            case "invalid credentials":
                 logger.info("Verifying error message for invalid credentials");
                 String errorMsg = login.getErrorMessage();
                 logger.info("Error message: {}", errorMsg);
                 Assert.assertTrue(errorMsg.contains("Epic sadface"));
-                logger.info("Error message validation passed");
+                logger.info("Invalid credentials validation passed");
                 break;
 
             case "username required":

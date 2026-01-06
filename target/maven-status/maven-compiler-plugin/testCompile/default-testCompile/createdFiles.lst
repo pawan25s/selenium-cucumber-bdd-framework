@@ -1,6 +1,12 @@
 BaseClass/baseClass.class
-StepDefinition/LoginStep.class
+utilities/AnnotationTransformer.class
+utilities/ExtentManager.class
 PageObject/HomePage.class
+utilities/RetryAnalyzer.class
 Hooks/hooks.class
+utilities/TestContext.class
+utilities/TestContext$1.class
+StepDefinition/LoginStep.class
+utilities/TestNGListener.class
 PageObject/LoginPage.class
 Runners/runnerTest.class
