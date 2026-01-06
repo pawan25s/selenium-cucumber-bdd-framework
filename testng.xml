@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="BDD Test Suite" parallel="methods" thread-count="3">
+    <listeners>
+        <listener class-name="utilities.TestNGListener"/>
+        <listener class-name="utilities.AnnotationTransformer"/>
+    </listeners>
+    <test name="Login Tests">
+        <classes>
+            <class name="Runners.runnerTest"/>
+        </classes>
+    </test>
+</suite>
