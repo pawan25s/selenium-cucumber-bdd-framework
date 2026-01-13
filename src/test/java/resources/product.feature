@@ -1,3 +1,5 @@
+
+@valid
 Feature: Products page functionality
 
   Background:

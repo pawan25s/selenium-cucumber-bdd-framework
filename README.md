@@ -16,7 +16,7 @@ Log4j
 
 WebDriverManager
 
-It automates the Login functionality of SauceDemo — a sample e-commerce website used for testing automation.
+It automates the Login, Product browsing, Cart management, Checkout, and Logout functionalities of SauceDemo — a sample e-commerce website used for testing automation.
 
 ==========================================================================
 📁 Project Structure
@@ -41,17 +41,27 @@ Automation-BDD-Project
         │   │   └── hooks.java
         │   │
         │   ├── PageObject/
-        │   │   ├── HomePage.java
-        │   │   └── LoginPage.java
+        │   │   ├── CartPage.java
+        │   │   ├── CheckOutPage.java
+        │   │   ├── LoginPage.java
+        │   │   └── ProductPage.java
         │   │
         │   ├── resources/
-        │   │   └── login.feature
+        │   │   ├── cart.feature
+        │   │   ├── checkout.feature
+        │   │   ├── login.feature
+        │   │   ├── logout.feature
+        │   │   └── product.feature
         │   │
         │   ├── Runners/
         │   │   └── runnerTest.java
         │   │
         │   ├── StepDefinition/
-        │   │   └── LoginStep.java
+        │   │   ├── CartStep.java
+        │   │   ├── CheckOutStep.java
+        │   │   ├── LoginStep.java
+        │   │   ├── LogoutStep.java
+        │   │   └── ProductStep.java
         │   │
         │   └── utilities/
         │       ├── AnnotationTransformer.java
@@ -122,11 +132,14 @@ git clone <repo-url>
 2️⃣ Navigate to project
 cd Automation-BDD-Project
 
-3️⃣ Run test
-mvn clean test
+3️⃣ Run tests
+- All features: `mvn clean test`
+- Specific features: Modify `features` in `runnerTest.java`
+- With tags: Add `tags = "@tag"` in `runnerTest.java`
 
-4️⃣ Cucumber report (Optional)
-/target/cucumber-reports
+4️⃣ Reports
+- Cucumber HTML: `target/cucumber-reports/cucumber.html`
+- ExtentReports: `target/extent-reports/`
 
 ==========================================================================
 🛠️ config.properties
@@ -137,16 +150,55 @@ password=secret_sauce
 browser=chrome
 
 ==========================================================================
-🧬 Feature File Example (login.feature)
+🧬 Feature File Examples
 
+**login.feature**
+```
 Feature: Login functionality
 
-  Scenario: Valid login
-    Given user is on login page
-    When user enters username
-    And user enters password
-    And user clicks login button
-    Then user should navigate to home page
+   Background:
+     Given user is on the SauceDemo login page
+
+   @valid
+   Scenario: Login with valid credentials
+     When user enters username "standard_user"
+     And user enters password "secret_sauce"
+     And user clicks login button
+     Then login result should be "success"
+
+   Scenario Outline: Login with invalid credentials
+     When user enters username "<username>"
+     And user enters password "<password>"
+     And user clicks login button
+     Then login result should be "<expected>"
+
+     Examples:
+       | username      | password     | expected             |
+       | invalid_user  | wrong_pass   | invalid credentials   |
+       |               | secret_sauce | username required     |
+       | standard_user |              | password required     |
+```
+
+**product.feature**
+```
+@valid
+Feature: Products page functionality
+
+   Background:
+     Given user is logged in
+
+   Scenario: Verify products page is displayed
+     Then products page should be displayed
+
+   Scenario Outline: Sort products
+     When user sorts products by "<sortOption>"
+     Then products should be sorted accordingly
+
+     Examples:
+       | sortOption          |
+       | Name (A to Z)       |
+       | Price (low to high) |
+```
 ==========================================================================
 
 🧑‍💻 Author

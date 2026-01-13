@@ -22,6 +22,9 @@ public class hooks extends baseClass {
         baseClass.startBrowser();
         logger.info("Test setup completed");
 
+        // Create ExtentTest for the scenario
+        ExtentManager.createTest(scenario.getName(), scenario.getName());
+
         // Clear any previous test data
         TestContext.clear();
     }

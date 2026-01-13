@@ -1,9 +1,15 @@
 /home/pawan/Automation-BDD-Project/src/test/java/BaseClass/baseClass.java
 /home/pawan/Automation-BDD-Project/src/test/java/Hooks/hooks.java
-/home/pawan/Automation-BDD-Project/src/test/java/PageObject/HomePage.java
+/home/pawan/Automation-BDD-Project/src/test/java/PageObject/CartPage.java
+/home/pawan/Automation-BDD-Project/src/test/java/PageObject/CheckOutPage.java
 /home/pawan/Automation-BDD-Project/src/test/java/PageObject/LoginPage.java
+/home/pawan/Automation-BDD-Project/src/test/java/PageObject/ProductPage.java
 /home/pawan/Automation-BDD-Project/src/test/java/Runners/runnerTest.java
+/home/pawan/Automation-BDD-Project/src/test/java/StepDefinition/CartStep.java
+/home/pawan/Automation-BDD-Project/src/test/java/StepDefinition/CheckOutStep.java
 /home/pawan/Automation-BDD-Project/src/test/java/StepDefinition/LoginStep.java
+/home/pawan/Automation-BDD-Project/src/test/java/StepDefinition/LogoutStep.java
+/home/pawan/Automation-BDD-Project/src/test/java/StepDefinition/ProductStep.java
 /home/pawan/Automation-BDD-Project/src/test/java/utilities/AnnotationTransformer.java
 /home/pawan/Automation-BDD-Project/src/test/java/utilities/ExtentManager.java
 /home/pawan/Automation-BDD-Project/src/test/java/utilities/RetryAnalyzer.java
