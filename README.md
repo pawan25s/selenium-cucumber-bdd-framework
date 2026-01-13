@@ -199,6 +199,54 @@ Feature: Products page functionality
        | Name (A to Z)       |
        | Price (low to high) |
 ```
+
+**cart.feature**
+```
+Feature: Cart functionality
+
+   Background:
+     Given user is logged in
+
+   Scenario: Add product to cart
+     When user adds "Sauce Labs Backpack" to cart
+     Then cart badge count should be "1"
+
+   Scenario: Remove product from cart
+     Given user has product in cart
+     When user removes product from cart
+     Then cart should be empty
+```
+
+**checkout.feature**
+```
+Feature: Checkout functionality
+
+   Background:
+     Given user is logged in
+     And user has products in cart
+
+   Scenario: Complete checkout successfully
+     When user navigates to cart
+     And user proceeds to checkout
+     And user enters checkout details:
+       | firstName | John   |
+       | lastName  | Doe    |
+       | zipCode   | 110001 |
+     And user completes checkout
+     Then order confirmation page should be displayed
+```
+
+**logout.feature**
+```
+Feature: Logout functionality
+
+   Background:
+     Given user is logged in
+
+   Scenario: Logout from application
+     When user logs out
+     Then user should be redirected to login page
+```
 ==========================================================================
 
 🧑‍💻 Author
