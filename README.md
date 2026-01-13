@@ -253,6 +253,6 @@ Feature: Logout functionality
 
 Pawan Singh
 SDET | Automation Tester
-GitHub: your-profile-link
+GitHub:
 
 
