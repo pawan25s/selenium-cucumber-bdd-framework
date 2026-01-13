@@ -5,7 +5,7 @@ import org.apache.logging.log4j.Logger;
 
 import BaseClass.baseClass;
 import io.cucumber.java.en.*;
-import PageObject.HomePage;
+import PageObject.ProductPage;
 import PageObject.LoginPage;
 import utilities.ExtentManager;
 import utilities.TestContext;
@@ -17,16 +17,30 @@ public class LoginStep {
     private static final Logger logger = LogManager.getLogger(LoginStep.class);
 
     LoginPage login;
-    HomePage homePage;
+    ProductPage productPage;
 
     @Given("user is on the SauceDemo login page")
     public void user_is_on_the_sauce_demo_login_page() {
         logger.info("Navigating to login page: {}", baseClass.getProperty("url"));
         baseClass.getDriver().get(baseClass.getProperty("url"));
         login = new LoginPage(baseClass.getDriver());
-        homePage = new HomePage(baseClass.getDriver());
+        productPage = new ProductPage(baseClass.getDriver());
         logger.info("Login page loaded successfully");
         // ExtentTest will be created in password step
+    }
+
+    @Given("user is logged in")
+    public void user_is_logged_in() {
+        logger.info("Logging in user for background setup");
+        baseClass.getDriver().get(baseClass.getProperty("url"));
+        login = new LoginPage(baseClass.getDriver());
+        productPage = new ProductPage(baseClass.getDriver());
+        login.setUsername("standard_user");
+        login.enterPassword("secret_sauce");
+        login.clickLogin();
+        // Assert logged in
+        Assert.assertTrue(productPage.isProductsPageDisplayed(), "User should be logged in and on products page");
+        logger.info("User logged in successfully");
     }
 
     @When("user enters username {string}")
@@ -45,10 +59,7 @@ public class LoginStep {
         login.enterPassword(password);
         logger.info("Password entered successfully");
 
-        // Create ExtentTest now that we have both username and password
-        String testName = TestContext.getDescriptiveTestName();
-        ExtentManager.createTest(testName, testName);
-        ExtentManager.getTest().info("Starting test: " + testName);
+        // ExtentTest is created in hooks
         ExtentManager.getTest().log(Status.INFO, "Entered password");
     }
 
@@ -69,7 +80,7 @@ public class LoginStep {
 
             case "success":
                 logger.info("Verifying login success");
-                Assert.assertTrue(homePage.isProductsDisplayed());
+                Assert.assertTrue(productPage.isProductsPageDisplayed());
                 logger.info("Login successful - products displayed");
                 break;
 

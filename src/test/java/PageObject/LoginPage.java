@@ -36,4 +36,8 @@ public class LoginPage {
 
     }
 
+    public boolean isLoginPageDisplayed() {
+        return driver.findElement(loginBtn).isDisplayed();
+    }
+
 }

@@ -1,12 +1,15 @@
 BaseClass/baseClass.class
 utilities/AnnotationTransformer.class
+PageObject/ProductPage.class
 utilities/ExtentManager.class
-PageObject/HomePage.class
 utilities/RetryAnalyzer.class
+PageObject/CartPage.class
 Hooks/hooks.class
 utilities/TestContext.class
 utilities/TestContext$1.class
 StepDefinition/LoginStep.class
+PageObject/CheckOutPage.class
 utilities/TestNGListener.class
 PageObject/LoginPage.class
+StepDefinition/ProductStep.class
 Runners/runnerTest.class
